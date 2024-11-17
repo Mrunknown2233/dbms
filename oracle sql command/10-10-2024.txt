@@ -1,0 +1,269 @@
+	create table customer
+(cust_id varchar2(4),
+name varchar2(10),
+city varchar2(10),
+age number,
+acc_no varchar2(4),
+balance float,
+primary key(cust_id,acc_no));
+
+insert into customer values('C101','Raj S','Mumbai',20,'A201',45000);
+insert into customer values('C102','Vijay','Delhi',21,'A202',50000);
+insert into customer values('C103','Harsh','Pune',22,'A203',55000);
+insert into customer values('C104','Kirti','Mumbai',23,'A204',59000);
+insert into customer values('C105','Khushboo','Pune',24,'A205',53000);
+
+create table department
+(dno number,
+dname varchar2(10),
+primary key (dno));
+
+insert into department values (10,'Sales');
+insert into department values (20,'Accounts');
+insert into department values (30,'Research');
+
+
+create table employee
+(emp_id varchar2(4),
+name varchar2(10),
+city varchar2(10),
+doj date,
+m_id varchar2(4),
+dno number,
+primary key(emp_id),
+foreign key (m_id) references employee (emp_id) on delete set null,
+foreign key (dno) references department (dno) on delete set null);
+
+insert into employee values('E201','Raj S','Mumbai','01-Jan-2020','E201',10);
+insert into employee values('E202','Vijay','Delhi','01-Feb-2021','E201',20);
+insert into employee values('E203','Harsh','Pune','10-Mar-2020','E202',30);
+insert into employee values('E204','Kirti','Mumbai','21-Apr-2021','E202',10);
+insert into employee values('E205','Khushboo','Pune','30-Jun-2020','E201',20);
+
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Oct 10 19:44:02 2024
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+Enter user-name: SYSTEM
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> create table customer
+  2  (cust_id varchar2(4),
+  3  name varchar2(10),
+  4  city varchar2(10),
+  5  age number,
+  6  acc_no varchar2(4),
+  7  balance float,
+  8  primary key(cust_id,acc_no));
+
+Table created.
+
+SQL> insert into customer values('C101','Raj S','Mumbai',20,'A201',45000);
+
+1 row created.
+
+SQL> insert into customer values('C102','Vijay','Delhi',21,'A202',50000);
+
+1 row created.
+
+SQL> insert into customer values('C103','Harsh','Pune',22,'A203',55000);
+
+1 row created.
+
+SQL> insert into customer values('C104','Kirti','Mumbai',23,'A204',59000);
+
+1 row created.
+
+SQL> insert into customer values('C105','Khushboo','Pune',24,'A205',53000);
+
+1 row created.
+
+SQL> create table department
+  2  (dno number,
+  3  dname varchar2(10),
+  4  primary key (dno));
+
+Table created.
+
+SQL> insert into department values (10,'Sales');
+
+1 row created.
+
+SQL> insert into department values (20,'Accounts');
+
+1 row created.
+
+SQL> insert into department values (30,'Research');
+
+1 row created.
+
+SQL> create table employee
+  2  (emp_id varchar2(4),
+  3  name varchar2(10),
+  4  city varchar2(10),
+  5  doj date,
+  6  m_id varchar2(4),
+  7  dno number,
+  8  primary key(emp_id),
+  9  foreign key (m_id) references employee (emp_id) on delete set null,
+ 10  foreign key (dno) references department (dno) on delete set null);
+
+Table created.
+
+SQL> insert into employee values('E201','Raj S','Mumbai','01-Jan-2020','E201',10);
+
+1 row created.
+
+SQL> insert into employee values('E202','Vijay','Delhi','01-Feb-2021','E201',20);
+
+1 row created.
+
+SQL> insert into employee values('E203','Harsh','Pune','10-Mar-2020','E202',30);
+
+1 row created.
+
+SQL> insert into employee values('E204','Kirti','Mumbai','21-Apr-2021','E202',10);
+
+1 row created.
+
+SQL> insert into employee values('E205','Khushboo','Pune','30-Jun-2020','E201',20);
+
+1 row created.
+
+SQL> create view v_cust as select name,city,age from customer;
+
+View created.
+
+SQL> select * from v_cust
+  2
+SQL> select * from v_cust;
+
+NAME       CITY              AGE
+---------- ---------- ----------
+Raj S      Mumbai             20
+Vijay      Delhi              21
+Harsh      Pune               22
+Kirti      Mumbai             23
+Khushboo   Pune               24
+
+SQL> insert into v_cust values('NIkunj','Mumbai',19);
+insert into v_cust values('NIkunj','Mumbai',19)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."CUSTOMER"."CUST_ID")
+
+
+SQL> update v_cust set name = 'Raj S' where name = 'Raj';
+
+0 rows updated.
+
+SQL> select * from v_cust;
+
+NAME       CITY              AGE
+---------- ---------- ----------
+Raj S      Mumbai             20
+Vijay      Delhi              21
+Harsh      Pune               22
+Kirti      Mumbai             23
+Khushboo   Pune               24
+
+SQL> update v_cust set name = 'Raj' where name = 'Raj S';
+
+1 row updated.
+
+SQL> select * from v_cust;
+
+NAME       CITY              AGE
+---------- ---------- ----------
+Raj        Mumbai             20
+Vijay      Delhi              21
+Harsh      Pune               22
+Kirti      Mumbai             23
+Khushboo   Pune               24
+
+SQL> create or replace view v_cust as select name,city,age from customer with read only;
+
+View created.
+
+SQL> update v_cust set name = 'Raj S' where name = 'Raj';
+update v_cust set name = 'Raj S' where name = 'Raj'
+                                       *
+ERROR at line 1:
+ORA-42399: cannot perform a DML operation on a read-only view
+
+
+SQL> create view v_book as select bname,price from book;
+create view v_book as select bname,price from book
+                                              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create force view v_book as select bname,price from book;
+
+Warning: View created with compilation errors.
+
+SQL> show errors;
+Errors for VIEW V_BOOK:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      ORA-00942: table or view does not exist
+SQL> create view v_emp_dept as select name,city,e.dno,dname from employee e join department d on e.dno;
+create view v_emp_dept as select name,city,e.dno,dname from employee e join department d on e.dno
+                                                                                                *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> create view v_emp_dept as select name,city,e.dno,dname from employee e join department d on e.dno=d.dno;
+
+View created.
+
+SQL> select * from v_emp_dept;
+
+NAME       CITY              DNO DNAME
+---------- ---------- ---------- ----------
+Raj S      Mumbai             10 Sales
+Vijay      Delhi              20 Accounts
+Harsh      Pune               30 Research
+Kirti      Mumbai             10 Sales
+Khushboo   Pune               20 Accounts
+
+SQL> delete from v_emp_dept where name = 'Raj S';
+
+1 row deleted.
+
+SQL> select * from v_emp_dept;
+
+NAME       CITY              DNO DNAME
+---------- ---------- ---------- ----------
+Vijay      Delhi              20 Accounts
+Harsh      Pune               30 Research
+Kirti      Mumbai             10 Sales
+Khushboo   Pune               20 Accounts
+
+SQL> select * from employee;
+
+EMP_ NAME       CITY       DOJ       M_ID        DNO
+---- ---------- ---------- --------- ---- ----------
+E202 Vijay      Delhi      01-FEB-21              20
+E203 Harsh      Pune       10-MAR-20 E202         30
+E204 Kirti      Mumbai     21-APR-21 E202         10
+E205 Khushboo   Pune       30-JUN-20              20
+
+SQL> commit;
+
+Commit complete.

@@ -1,0 +1,428 @@
+12:38 13-10-2024
+
+
+To show the tables present in the database
+select table_name from user_all_tables;
+/*===============================================================================================================*/
+LOGMNR by default wale table hai;
+SQL> select table_name from user_all_tables;
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_SESSION_EVOLVE$
+LOGMNR_GLOBAL$
+LOGMNR_PDB_INFO$
+LOGMNR_DID$
+LOGMNR_UID$
+LOGMNRGGC_GTLO
+LOGMNRGGC_GTCS
+LOGMNRC_DBNAME_UID_MAP
+LOGMNR_LOG$
+LOGMNR_PROCESSED_LOG$
+LOGMNR_SPILL$
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_AGE_SPILL$
+LOGMNR_RESTART_CKPT_TXINFO$
+LOGMNR_ERROR$
+LOGMNR_RESTART_CKPT$
+LOGMNR_FILTER$
+LOGMNR_SESSION_ACTIONS$
+LOGMNR_PARAMETER$
+LOGMNR_SESSION$
+LOGMNR_PROFILE_TABLE_STATS$
+LOGMNR_PROFILE_PLSQL_STATS$
+REDO_DB
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+REDO_LOG
+ROLLING$CONNECTIONS
+ROLLING$DATABASES
+ROLLING$DIRECTIVES
+ROLLING$EVENTS
+ROLLING$PARAMETERS
+ROLLING$PLAN
+ROLLING$STATISTICS
+ROLLING$STATUS
+MVIEW$_ADV_WORKLOAD
+MVIEW$_ADV_BASETABLE
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+MVIEW$_ADV_SQLDEPEND
+MVIEW$_ADV_PRETTY
+MVIEW$_ADV_TEMP
+MVIEW$_ADV_FILTER
+MVIEW$_ADV_LOG
+MVIEW$_ADV_FILTERINSTANCE
+MVIEW$_ADV_LEVEL
+MVIEW$_ADV_ROLLUP
+MVIEW$_ADV_AJG
+MVIEW$_ADV_FJG
+MVIEW$_ADV_GC
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+MVIEW$_ADV_CLIQUE
+MVIEW$_ADV_ELIGIBLE
+MVIEW$_ADV_OUTPUT
+MVIEW$_ADV_EXCEPTIONS
+MVIEW$_ADV_PARAMETERS
+MVIEW$_ADV_INFO
+MVIEW$_ADV_JOURNAL
+MVIEW$_ADV_PLAN
+AQ$_QUEUE_TABLES
+AQ$_KEY_SHARD_MAP
+AQ$_QUEUES
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+AQ$_SCHEDULES
+AQ$_INTERNET_AGENTS
+AQ$_INTERNET_AGENT_PRIVS
+SCHEDULER_PROGRAM_ARGS_TBL
+SCHEDULER_JOB_ARGS_TBL
+LOGSTDBY$APPLY_MILESTONE
+LOGSTDBY$SCN
+LOGSTDBY$FLASHBACK_SCN
+LOGSTDBY$PLSQL
+LOGSTDBY$SKIP_TRANSACTION
+LOGSTDBY$SKIP
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGSTDBY$SKIP_SUPPORT
+LOGSTDBY$HISTORY
+LOGSTDBY$EDS_TABLES
+LOGSTDBY$PARAMETERS
+LOGSTDBY$EVENTS
+SQLPLUS_PRODUCT_PROFILE
+HELP
+CUSTOMER
+DEPARTMENT
+EMPLOYEE
+LOGMNR_GT_TAB_INCLUDE$
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_GT_USER_INCLUDE$
+LOGMNR_GT_XID_INCLUDE$
+LOGMNRT_MDDL$
+OL$
+OL$HINTS
+OL$NODES
+LOGMNR_DICTSTATE$
+LOGMNRC_GTLO
+LOGMNRC_GTCS
+LOGMNRC_SEQ_GG
+LOGMNRC_CON_GG
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNRC_CONCOL_GG
+LOGMNRC_IND_GG
+LOGMNRC_INDCOL_GG
+LOGMNRC_SHARD_TS
+LOGMNRC_TSPART
+LOGMNRC_TS
+LOGMNRC_GSII
+LOGMNRC_GSBA
+LOGMNR_SEED$
+LOGMNR_DICTIONARY$
+LOGMNR_OBJ$
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_TAB$
+LOGMNR_COL$
+LOGMNR_ATTRCOL$
+LOGMNR_TS$
+LOGMNR_IND$
+LOGMNR_USER$
+LOGMNR_TABPART$
+LOGMNR_TABSUBPART$
+LOGMNR_TABCOMPART$
+LOGMNR_TYPE$
+LOGMNR_COLTYPE$
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_ATTRIBUTE$
+LOGMNR_LOB$
+LOGMNR_CON$
+LOGMNR_CONTAINER$
+LOGMNR_CDEF$
+LOGMNR_CCOL$
+LOGMNR_ICOL$
+LOGMNR_LOBFRAG$
+LOGMNR_INDPART$
+LOGMNR_INDSUBPART$
+LOGMNR_INDCOMPART$
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_LOGMNR_BUILDLOG
+LOGMNR_NTAB$
+LOGMNR_OPQTYPE$
+LOGMNR_SUBCOLTYPE$
+LOGMNR_KOPM$
+LOGMNR_PROPS$
+LOGMNR_ENC$
+LOGMNR_REFCON$
+LOGMNR_IDNSEQ$
+LOGMNR_PARTOBJ$
+LOGMNRP_CTAS_PART_MAP
+
+TABLE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_SHARD_TS
+LOGSTDBY$APPLY_PROGRESS
+
+134 rows selected.
+/*===============================================================================*/
+
+
+/*==============================================================================*/
+select sequence_name from user_sequences;
+returns the sequence present in the data base.
+/*==============================================================================*/
+
+SQL> create table student ( rollno number, name varchar2(30));
+
+Table created.
+
+SQL> insert into student values(stud_seq.nextval,'Soumya');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'Nikunj');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'Carl Jhonshon');
+
+1 row created.
+
+SQL> select * from student;
+
+    ROLLNO NAME
+---------- ------------------------------
+         1 Soumya
+         2 Nikunj
+         3 Carl Jhonshon
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select sequence_name from user_sequence;
+select sequence_name from user_sequence
+                          *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select sequence_name from user_sequences;
+
+SEQUENCE_NAME
+--------------------------------------------------------------------------------
+LOGMNR_DIDS$
+LOGMNR_EVOLVE_SEQ$
+LOGMNR_SEQ$
+LOGMNR_UIDS$
+MVIEW$_ADVSEQ_GENERIC
+MVIEW$_ADVSEQ_ID
+ROLLING_EVENT_SEQ$
+STUD_SEQ
+
+8 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from sequence where sequence_name = 'STUD_SEQ';
+select * from sequence where sequence_name = 'STUD_SEQ'
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from user_sequences where sequence_name = 'STUD_SEQ';
+
+SEQUENCE_NAME
+--------------------------------------------------------------------------------
+ MIN_VALUE  MAX_VALUE INCREMENT_BY C O CACHE_SIZE LAST_NUMBER S E S S K
+---------- ---------- ------------ - - ---------- ----------- - - - - -
+STUD_SEQ
+         1 1.0000E+28            1 N N         20          21 N N N N N
+
+
+SQL> drop sequence stud_seq;
+
+Sequence dropped.
+
+SQL> delete from student;
+
+3 rows deleted.
+
+SQL> create sequence stud_seq;
+
+Sequence created.
+
+SQL> drop sequence stud_seq;
+
+Sequence dropped.
+
+SQL> create sequence stud_seq
+  2  increment by -1;
+
+Sequence created.
+
+SQL> insert into student values(stud_seq.nextval,'Soumya');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'Nikunj');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'carl johnson');
+
+1 row created.
+
+SQL> select * from student;
+
+    ROLLNO NAME
+---------- ------------------------------
+        -1 Soumya
+        -2 Nikunj
+        -3 carl johnson
+
+
+
+SQL> drop sequence stud_seq;
+
+Sequence dropped.
+
+SQL> delete from student;
+
+3 rows deleted.
+
+SQL> create sequence stud_seq
+  2  start with 1
+  3  minvalue -5
+  4  maxvalue 5
+  5  increment by 2
+  6  cycle cache 6;
+create sequence stud_seq
+*
+ERROR at line 1:
+ORA-04013: number to CACHE must be less than one cycle
+
+
+SQL> create sequence stud_seq
+  2
+SQL> create sequence stud_seq
+  2     start with 1
+  3      minvalue -5
+  4      maxvalue 5
+  5      increment by 2
+  6      cycle
+  7      cache 5;
+
+Sequence created.
+
+SQL> insert into student values(stud_seq.nextval,'Soumya');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'Nikunj');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'carl johnson');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'Raze');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'Harbour');
+
+1 row created.
+
+SQL> insert into student values(stud_seq.nextval,'Reyna');
+
+1 row created.
+
+SQL> select * from student;
+
+    ROLLNO NAME
+---------- ------------------------------
+         1 Soumya
+         3 Nikunj
+         5 carl johnson
+        -5 Raze
+        -3 Harbour
+        -1 Reyna
+
+6 rows selected.
+
+
+
+SQL> drop sequence stud_seq;
+
+Sequence dropped.
+
+SQL> create sequence stud_seq;
+
+Sequence created.
+
+
+alter sequence stud_seq
+  2  maxvalue 10;
+
+Sequence altered.
+
+SQL>  select * from user_sequences where sequence_name = 'STUD_SEQ';
+
+SEQUENCE_NAME
+--------------------------------------------------------------------------------
+ MIN_VALUE  MAX_VALUE INCREMENT_BY C O CACHE_SIZE LAST_NUMBER S E S S K
+---------- ---------- ------------ - - ---------- ----------- - - - - -
+STUD_SEQ
+         1         10            1 N N         20           2 N N N N N
+
+
+SQL> select stud_seq.currval from student;
+
+   CURRVAL
+----------
+         1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

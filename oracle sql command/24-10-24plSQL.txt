@@ -1,0 +1,129 @@
+/*FOR EXPLICIT CURSOR*/
+declare
+	vemployee employee%rowtype;
+	total_rows number;
+	cursor cur_employee as select * from employee where city = &city;
+begin
+	open cur_employee;
+	loop
+	fetch cur_employee into vemployee
+	exit when cur_employee%notfound;
+	dbms_output.put_line(vemployee.name ||' '|| vemployee.doj || ' '|| vemployee.salary);
+	end loop;
+	total_rows := cur_employee%rowcount;
+	if total_rows = 0 then 
+	raise no_data_found;
+	end if;
+	dbms_output.put_line(total_rows ||' Employees are fetched');
+	close cur_employee;
+exception
+	when no_data_found then
+	dbms_output.put_line("No such city ');
+end;
+/
+/*===========================================================================*/
+
+Table:------------------------------------------------------------------------
+	create table stud_marks
+	(name varchar2(15),
+	sub1 number,
+	sub2 number,
+	sub3 number);
+
+	insert into stud_marks values ('Khushi',87,80,75);
+	insert into stud_marks values ('Soumya',75,70,68);
+	insert into stud_marks values ('Ajay',60,57,55); 
+	insert into stud_marks values ('Raj',49,50,45); 
+	insert into stud_marks values ('Karan',38,35,37); 
+
+
+Functions---------------------------------------------------------------------
+create function percentage(subject1 in number,subject3 in number,subject3 in number)
+return number
+is
+percentage number;
+begin
+percent :=((subject1 + subject2 + subject3)/300) *100;
+return percentage;
+end;
+/
+
+
+
+create table stud_percent
+(name varchar2(15),
+percent float);
+
+insert into stud_percent values ('Khushi',80.67);
+insert into stud_percent values ('Soumya',71.00);
+insert into stud_percent values ('Ajay',57.33);
+insert into stud_percent values ('Raj',48.00);
+insert into stud_percent values ('Karan',36.67);
+Procedures---------------------------------------------------------------------
+create or replace procedure grade (name varchar, percent float, grade out varchar)
+is
+begin
+if percent >=75 then 
+grade := 'Distinction';
+
+elsif percent between 60 and 74 then 
+grade :='First';
+
+
+elsif percent between 50 and 59 then 
+grade :='Second';
+
+elsif percent between 40 and 49 then 
+grade :='Pass';
+
+else
+grade := 'Fail';
+end if;
+
+end;
+/
+
+
+
+
+create or replace procedure callee_grade
+is
+vname varchar2(20);
+vpercent float;
+vgrade varchar2(15);
+cursor cur_percent is select * from stud_percent;
+begin
+open cur_percent;
+loop
+fetch cur_percent into vname,vpercent;
+exit when cur_percent%notfound;
+grade(vname,vpercent,vgrade);
+dbms_output.put_line(vname|| ' ' || vpercent || ' ' || vgrade);
+end loop;
+close cur_percent;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

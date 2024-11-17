@@ -1,0 +1,144 @@
+/*----------------------------------------------------------*/
+1)
+	--issme humne '&city;' ko quotes meh likha kyuki we are giving a 										string input in city.
+	declare
+	vname varchar2(15);
+	begin
+	select name into vname from employee where city ='&city'; 
+	dbms_output.put_line('Name of the employee is: '||vname);
+	end;
+	/
+
+
+2)
+	declare 
+	vname employee.name%type;
+	begin
+	select name into vname from employee where city = '&city';
+	dbms_output.put_line('Name of employee is: '||vname);
+	end;
+	/
+3)
+	declare
+	vname employee.name%type;
+	vdoj employee.doj%type;
+	vsalary employee.salary%type;
+	begin
+	select name,doj,salary into vname,vdoj,vsalary from employee where city = '&city';
+	dbms_output.put_line('Name is:'||vname);		
+	dbms_output.put_line('DOj is : '||vdoj);
+	dbms_output.put_line('Salary is: '||vsalary);	
+	end;
+	/
+
+4)
+	declare
+	vemployee employee%rowtype;
+	begin
+	select * into vemployee from employee where city = '&city';
+	dbms_output.put_line('Name is: '||vemployee.name);		
+	dbms_output.put_line('DOj is : '||vemployee.doj);
+	dbms_output.put_line('Salary is: '||vemployee.salary);	
+	end;
+	/
+
+
+5)
+	System Defined Exceptions
+	declare 
+	no1 number := &no1;
+	no2 number := &no2;	
+	begin 
+	dbms_output.put_line('Division of Number is : '||no1/no2);
+	exception
+	when zero_divide then 
+	dbms_output.put_line('Number 2 cannot be Zero');
+	end;
+	/
+
+
+
+
+
+6)
+	/*no_data_found & too_many_rows */
+	declare
+	vemployee employee%rowtype;
+	begin
+	select * into vemployee from employee where city = '&city';
+	dbms_output.put_line('Name is: '||vemployee.name);		
+	dbms_output.put_line('DOj is : '||vemployee.doj);
+	dbms_output.put_line('Salary is: '||vemployee.salary);	
+	exception
+	when no_data_found then 
+	dbms_output.put_line('No such city in table');
+	when too_many_rows then 
+	dbms_output.put_line('Due to input multiple tuples are returned');
+	end;
+	/
+
+
+
+7)
+	/*Others*/
+	declare
+	vemployee employee%rowtype;
+	begin
+	select * into vemployee from employee where city = '&city';
+	dbms_output.put_line('Name is: '||vemployee.name);		
+	dbms_output.put_line('DOj is : '||vemployee.doj);
+	dbms_output.put_line('Salary is: '||vemployee.salary);	
+	exception
+	when others then 
+	dbms_output.put_line('No such city in table');
+	end;
+	/
+
+
+8)
+	/*user defined exception */
+	declare
+	vrollno student.rollno%type :=&vrollno;
+	vstudent student%rowtype;
+	ex_invalid_rollno exception;
+	begin
+	if vrollno < 0 then	
+	raise ex_invalid_rollno;
+	end if;
+	select * into vstudent from student where rollno = vrollno;
+	dbms_output.put_line('Name of student is : '||vstudent.name);
+	exception
+	when no_data_found then 
+	dbms_output.put_line('No such Roll Number in table');
+	when ex_invalid_rollno then 
+	dbms_output.put_line('Roll number should be greater than zero');
+	end;
+	/
+
+9)
+	/*Cursor */
+	/*Implicit cursor */
+	declare
+	total_rows number;
+	begin 
+	update employee set salary = salary * 1.10 where dno = &dno;
+	if sql%found then
+	total_rows := sql%rowcount;
+	dbms_output.put_line(total_rows||'Number of Employees Updated ');
+	else
+	dbms_output.put_line('Dno not in table ');
+	end if;
+	end;
+		
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+
+	

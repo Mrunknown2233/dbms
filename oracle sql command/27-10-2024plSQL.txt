@@ -1,0 +1,31 @@
+create or replace trigger after_product_insert_delete
+after 
+insert or update of prod_price
+on product 
+for each row
+begin 
+insert into product_price_history(pid,pname,sname,price,price_changed_date) values (:new.prod_id,:new.prod_name,:new.supp_name,:new.prod_price,sysdate);
+end;
+/
+
+create or replace trigger after_product_insert_delete
+after 
+insert or update of prod_price
+on product 
+when (new.prod_price>=40000)
+for each row
+begin 
+insert into product_price_history(pid,pname,sname,price,price_changed_date) values (:new.prod_id,:new.prod_name,:new.supp_name,:new.prod_price,sysdate);
+end;
+/
+
+create or replace trigger after_product_delete
+after 
+delete
+on product 
+referencing old as a new as b 
+for each row
+begin 
+update product_price_history set is_deleted = 1,deleted_at = sysdate where pid = :a.prod_id;
+end;
+/

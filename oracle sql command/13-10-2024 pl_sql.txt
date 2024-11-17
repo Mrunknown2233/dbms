@@ -1,0 +1,35 @@
+/*====================================================================*/
+1)
+begin
+dbms_output.put_line('Welcome to PL/SQL');
+end;
+/
+
+
+2)
+declare
+	name varchar(20) :='Hello world';
+begin
+	dbms_output.put_line('The string is '||name);	
+end;
+/
+
+3)
+declare 
+	no1 number;
+	no2 number;
+begin
+	no1:=10;
+	no2:=5;
+	dbms_output.put_line('Division of a Number is :'||no1/no2);
+end;
+/
+
+4)
+declare
+	no1 number :=&no1;
+	no2 number :=&no2;
+begin
+	dbms_output.put_line('Division of a number is: '||no1/no2);
+end;
+/

@@ -1,0 +1,39 @@
+create or replace procedure swap(num1 IN OUT number,num2 IN OUT number)
+is
+temp number;
+begin	
+temp := num1;
+num1:=num2;
+num2:=temp;
+end;
+/
+create or replace procedure callee_swap
+is 
+num1 number := &num1;
+num2 number := &num2;
+begin
+	dbms_output.put_line('Before swap Num1 = '||num1||'Num2 = '||num2);
+	swap(num1,num2);
+	dbms_output.put_line('After swap Num1 = '||num1||'Num2 = '||num2);
+end;
+/
+exec callee_swap;
+/*=========================================================================*/
+create or replace procedure callee_swap(num1 In Out number,num2 In Out number)
+is 
+
+begin
+	dbms_output.put_line('Before swap Num1 = '||num1||'Num2 = '||num2);
+	swap(num1,num2);
+	dbms_output.put_line('After swap Num1 = '||num1||'Num2 = '||num2);
+end;
+/
+
+declare
+num1 number := &num1;
+num2 number := &num2;
+begin
+callee_swap(num1,num2);
+end;
+/
+
