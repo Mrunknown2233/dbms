@@ -1,3 +1,0 @@
-User Name : system
-
-Password = 2411
