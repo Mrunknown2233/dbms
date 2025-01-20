@@ -1,2 +1,2 @@
 # dbms
-This are the commands which i have performed while learning Database Management System.
+This are the commands which i have performed and written while learning Database Management System.
